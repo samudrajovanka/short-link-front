@@ -10,12 +10,14 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.2.2",
     "@tanstack/react-query": "^5.51.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "eslint-config-next": "^15.3.2",
     "lucide-react": "^0.510.0",
     "next": "^15.3.2",
+    "next-auth": "^5.0.0-beta.28",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwind-merge": "^3.3.0"

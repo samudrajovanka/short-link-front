@@ -1,7 +1,3 @@
-const HomePage = async () => {
-  return (
-    <h1>Welcome to Short Link</h1>
-  );
-};
+import Home from '@/components/pages/Home';
 
-export default HomePage;
+export default Home;

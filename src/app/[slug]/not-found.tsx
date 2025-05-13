@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Text from '@/components/elements/Text';
+import Text from '@/components/ui/Text';
 
 const NotFoundPage = () => {
   return (

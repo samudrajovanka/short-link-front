@@ -1,20 +1,9 @@
-/**
- * ! Example for use react query on client component using hydrate from server
- */
-'use client';
-
-import { useUsers } from '@/query/user';
+import Text from '@/components/ui/Text';
 
 const Home = () => {
-  const usersQuery = useUsers();
-
   return (
-    <div>
-      <p>Users list</p>
-
-      {usersQuery.data?.map((user) => (
-        <p key={user.email}>{user.name}</p>
-      ))}
+    <div className="flex flex-col items-center justify-center h-dvh">
+      <Text typography="subheading">Welcome to Short Link</Text>
     </div>
   );
 };
