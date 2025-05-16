@@ -1,14 +1,39 @@
-// import { useQuery } from '@tanstack/react-query';
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 
-// import { getAccessLink } from '@/repositories/shortLink';
+import { SuccessResponseWithData, SuccessResponseWithPagination } from '@/lib/fetch/types';
+import { getLink, getLinks } from '@/repositories/shortLink';
+import { GetLinkQuery, ShortLink } from '@/repositories/shortLink/types';
 
-// export const getAccessLinkKey = (slug: string) => [slug, 'access'];
+export const getLinksKeyQuery = (query?: GetLinkQuery) => {
+  if (!query) {
+    return ['shortLinks'];
+  }
 
-// export const useAccessLink = (slug: string) => {
-//   const result = useQuery({
-//     queryKey: getAccessLinkKey(slug),
-//     queryFn: () => getAccessLink(slug)
-//   });
+  return ['shortLinks', query];
+};
 
-//   return result;
-// };
+export const linksOptions = (query?: GetLinkQuery) => queryOptions({
+  queryKey: getLinksKeyQuery(query),
+  queryFn: () => getLinks(query)
+    .then(res => res.json() as Promise<SuccessResponseWithPagination<{ shortLinks: ShortLink[] }>>)
+});
+
+export const useLinks = (query?: GetLinkQuery) => {
+  const result = useSuspenseQuery(linksOptions(query));
+  return result;
+};
+
+export const getLinkKeyQuery = (slug: string) => {
+  return ['shortLink', slug];
+};
+
+export const linkOptions = (slug: string) => queryOptions({
+  queryKey: getLinkKeyQuery(slug),
+  queryFn: () => getLink(slug)
+    .then(res => res.json() as Promise<SuccessResponseWithData<{ shortLink: ShortLink }>>)
+});
+
+export const useLink = (slug: string) => {
+  const result = useSuspenseQuery(linkOptions(slug));
+  return result;
+};

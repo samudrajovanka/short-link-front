@@ -9,12 +9,6 @@ export const queryClientConfig = {
     queries: {
       refetchOnWindowFocus: false,
       staleTime: STALE_TIME
-    },
-    mutations: {
-      onError: (error: Error) => {
-        /** You can use toast or notification here */
-        console.error(error.message);
-      }
     }
   }
 };

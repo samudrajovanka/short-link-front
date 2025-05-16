@@ -12,3 +12,16 @@ export type SuccessResponseWithData<TData> = ResponseTemplate & {
   success: true;
   data:    TData;
 }
+
+export type Pagination = {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
+export type SuccessResponseWithPagination<TData> = SuccessResponseWithData<TData> & {
+  meta: {
+    pagination: Pagination
+  }
+};

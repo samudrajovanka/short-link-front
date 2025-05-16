@@ -19,6 +19,14 @@ export default class Fetch {
     return `${this.baseUrl}${url}`;
   }
 
+  private handleResponse(response: Response): Promise<Response> {
+    if (response.status >= 200 && response.status < 400) {
+      return Promise.resolve(response);
+    } else {
+      return Promise.reject(response);
+    }
+  }
+
   get(path: string, options?: FetchOptions) {
     const { signal } = new AbortController();
 
@@ -29,7 +37,7 @@ export default class Fetch {
         ...(options?.headers || {})
       },
       ...options
-    });
+    }).then(this.handleResponse);
   }
 
   post(path: string, body: object, options?: FetchOptions) {
@@ -45,7 +53,7 @@ export default class Fetch {
       },
       body: JSON.stringify(body),
       ...options
-    });
+    }).then(this.handleResponse);
   }
 
   patch(path: string, body: object, options?: FetchOptions) {
@@ -61,7 +69,7 @@ export default class Fetch {
       },
       body: JSON.stringify(body),
       ...options
-    });
+    }).then(this.handleResponse);
   }
 
   delete(path: string, options?: FetchOptions) {
@@ -75,6 +83,6 @@ export default class Fetch {
         ...(options?.headers || {})
       },
       ...options
-    });
+    }).then(this.handleResponse);
   }
 }

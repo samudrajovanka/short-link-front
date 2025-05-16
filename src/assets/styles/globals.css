@@ -31,11 +31,15 @@
   body {
     @apply font-inter;
   }
+
+  p[data-slot='form-message'] {
+    @apply !text-xs;
+  }
 }
 
 @layer utilities {
   .container {
-    @apply mx-auto max-w-6xl w-full px-4
+    @apply !mx-auto max-w-6xl w-full !px-4;
   }
 }
 
